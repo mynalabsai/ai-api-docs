@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>openapi_client.model.lipsync_text_to_templated_video_request.LipsyncTextToTemplatedVideoRequest - Myna Docs</title>
+    <title>Curl - Myna Docs</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "openapi_client.model.lipsync_text_to_templated_video_request.LipsyncTextToTemplatedVideoRequest";
-        var mkdocs_page_input_path = "models/LipsyncTextToTemplatedVideoRequest.md";
+        var mkdocs_page_name = "Curl";
+        var mkdocs_page_input_path = "quickstart/curl.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -45,16 +45,18 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Quickstart</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../quickstart/auth/">Auth / token</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../auth/">Auth / token</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../quickstart/curl/">Curl</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Curl</a>
+    <ul class="current">
+    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../quickstart/macros/">File Macros For REST</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../macros/">File Macros For REST</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../quickstart/postman/">Postman</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../postman/">Postman</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../quickstart/swagger/">Swagger</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../swagger/">Swagger</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API's</span></p>
@@ -84,7 +86,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>openapi_client.model.lipsync_text_to_templated_video_request.LipsyncTextToTemplatedVideoRequest</li>
+          <li>Quickstart &raquo;</li>
+      <li>Curl</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -93,80 +96,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="openapi_clientmodellipsync_text_to_templated_video_requestlipsynctexttotemplatedvideorequest">openapi_client.model.lipsync_text_to_templated_video_request.LipsyncTextToTemplatedVideoRequest</h1>
-<p>Get video where someone says your text. Standart Frontend request.</p>
-<h2 id="model-type-info">Model Type Info</h2>
-<table>
-<thead>
-<tr>
-<th>Input Type</th>
-<th>Accessed Type</th>
-<th>Description</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dict, frozendict.frozendict,</td>
-<td>frozendict.frozendict,</td>
-<td>Get video where someone says your text. Standart Frontend request.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="dictionary-keys">Dictionary Keys</h3>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Input Type</th>
-<th>Accessed Type</th>
-<th>Description</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ID</strong></td>
-<td>str,</td>
-<td>str,</td>
-<td>The identifier of the message. Used for tracking. Random UUID4 if not specified. Don&#x27;t use if you don&#x27;t need it specifically</td>
-<td>[optional]</td>
-</tr>
-<tr>
-<td><strong>token</strong></td>
-<td>str,</td>
-<td>str,</td>
-<td>The token for query. make sure you have correct permissions</td>
-<td>[optional]</td>
-</tr>
-<tr>
-<td><strong>text</strong></td>
-<td>str,</td>
-<td>str,</td>
-<td>Text to say.</td>
-<td>[optional]</td>
-</tr>
-<tr>
-<td><strong>template</strong></td>
-<td>str,</td>
-<td>str,</td>
-<td>Template, f.e. \&quot;santa\&quot;.</td>
-<td>[optional]</td>
-</tr>
-<tr>
-<td><strong>any_string_name</strong></td>
-<td>dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader</td>
-<td>frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO</td>
-<td>any string name can be used but the value must be the correct type</td>
-<td>[optional]</td>
-</tr>
-</tbody>
-</table>
-<p><a href="../../README.md#documentation-for-models">[Back to Model list]</a> <a href="../../README.md#documentation-for-api-endpoints">[Back to API list]</a> <a href="../../README.md">[Back to README]</a></p>
+                <h1 id="curl">Curl</h1>
+<p>TLDR: запрашиваем tts</p>
+<pre><code class="language-jsx">curl https://gateway.mynaservice.ai/v1/tts -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;ID&quot;: &quot;test-tts&quot;,  &quot;token&quot;: &quot;ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SjBkSE1pT25zaWJtOXNhVzFwZENJNmRISjFaWDE5LjJBREdPeS1CUTlMbWZSMWE3RXpfNEhpT2NIUkRGNWF6X3JVRi1wMmY0MzQ=&quot;,&quot;text&quot;: &quot;i am the president of the united states&quot;,&quot;speaker&quot;: &quot;obama&quot;,&quot;speed&quot;: 1.0,&quot;padMsLeft&quot;: 0,&quot;padMsRight&quot;: 0}'
+</code></pre>
+<pre><code class="language-jsx">{
+    &quot;ID&quot;: &quot;test-tts&quot;,
+    &quot;token&quot;: &quot;ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SjBkSE1pT25zaWJtOXNhVzFwZENJNmRISjFaWDE5LjJBREdPeS1CUTlMbWZSMWE3RXpfNEhpT2NIUkRGNWF6X3JVRi1wMmY0MzQ=&quot;, 
+    &quot;text&quot;: &quot;i am the president of the united states&quot;,
+    &quot;speaker&quot;: &quot;obama&quot;,
+    &quot;speed&quot;: 1.0,
+  &quot;padMsLeft&quot;: 0,
+  &quot;padMsRight&quot;: 0,
+}
+</code></pre>
+<p><code>token</code> — тестовый токен, подробнее смотри <a href="https://www.notion.so/Auth-token-9be08543e19a4dfd84b5057e53c6f1ed">Auth / token</a> </p>
+<p><code>ID</code> — id запроса, используется для трейсинга, логирования и прочего. Лучше не задавать, тогда это будет случайный UUID</p>
+<p><code>text</code>, <code>speaker</code>, <code>speed</code>, <code>padMsLeft</code>, <code>padMsRight</code> — параметры ттс</p>
+<p>you can find test requests here <a href="https://github.com/mynalabsai/gateway/tree/master/json">https://github.com/mynalabsai/gateway/tree/master/json</a></p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../auth/" class="btn btn-neutral float-left" title="Auth / token"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../macros/" class="btn btn-neutral float-right" title="File Macros For REST">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -188,6 +142,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../auth/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../macros/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
