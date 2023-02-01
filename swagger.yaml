@@ -1,0 +1,1683 @@
+openapi: 3.0.1
+info:
+  title: Neiro.ai ML Backend Gateway
+  description: 'Centralized Gateway to access neiro.ai ML services. Supports HTTP
+    and GRPC throught grpc-gateway. Protobuf api available here: https://github.com/mynalabsai/gateway/api/api.proto'
+  contact:
+    name: ml gateway
+    url: https://github.com/mynalabsai/gateway
+    email: kamelichev@mynalabs.ai
+  version: "1.0"
+servers:
+- url: http://gateway.neiro.ai:8777/
+tags:
+- name: TTS
+- name: VC
+- name: ASR
+- name: LipSync
+- name: Demos
+paths:
+  /v1/asr:
+    post:
+      tags:
+      - ASR
+      operationId: ASR_ASR
+      requestBody:
+        description: VC request. Send speaker id (obama, eilish, etc) and audio bytes.
+          Bytes should be in WAV, raw for GRPC, base64 for HTTP
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/asrASRRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/content-lipsync:
+    post:
+      tags:
+      - LipSync
+      summary: Get video where someone says your text. Standart Frontend request.
+      operationId: LipSync_ContentLipSync
+      requestBody:
+        description: 'LipSync request. '
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lipsyncContentRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                text_to_templated_video:
+                  s3Link: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/custom-video:
+    post:
+      tags:
+      - LipSync
+      summary: Clip your video with given audio and do lipsync
+      operationId: LipSync_CustomVideo
+      requestBody:
+        description: Custom Video with lipsync
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lipsyncCustomVideoRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                custom-video:
+                  s3Link: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/greeting:
+    post:
+      tags:
+      - LipSync
+      summary: Get video with greeting for name.
+      operationId: LipSync_Greeting
+      requestBody:
+        description: Greeting request. Get Id for template, for voice and send name.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lipsyncGreetingRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                lipsync:
+                  s3Link: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                  s3Path: android/video.mp4
+                  url: video.mp4
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/lipsync:
+    post:
+      tags:
+      - LipSync
+      summary: Get video with custom speech.
+      operationId: LipSync_LipSync
+      requestBody:
+        description: LipSync request. Get Id for template, and send audio bytes. Bytes
+          should be in WAV, raw for GRPC, base64 for HTTP
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lipsyncLipSyncRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                lipsync:
+                  s3Link: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                  s3Path: android/video.mp4
+                  url: video.mp4
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/lipsync-looped:
+    post:
+      tags:
+      - LipSync
+      summary: Get video with custom speech. End of video can be concatenated with
+        initial template
+      operationId: LipSync_LipSyncLooped
+      requestBody:
+        description: LipSync request. Get Id for template, and send audio bytes. Bytes
+          should be in WAV, raw for GRPC, base64 for HTTP
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lipsyncLipSyncRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                lipsync:
+                  s3Link: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                  s3Path: android/video.mp4
+                  url: video.mp4
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/new-tts:
+    post:
+      tags:
+      - TTS
+      summary: Get an audio from text.
+      operationId: TTS_NewTTS
+      requestBody:
+        description: TTS request. Send text and speaker id (obama, eilish, etc)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ttsTTSRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                newTts:
+                  url: base64 encoded string===
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      deprecated: true
+      x-codegen-request-body-name: body
+  /v1/new-vc:
+    post:
+      tags:
+      - VC
+      summary: Get audio with another voice.
+      operationId: VC_NewVC
+      requestBody:
+        description: VC request. Send speaker id (obama, eilish, etc) and audio bytes.
+          Bytes should be in WAV, raw for GRPC, base64 for HTTP
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vcVCRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                new_vc:
+                  data: base64 encoded string===
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      deprecated: true
+      x-codegen-request-body-name: body
+  /v1/random-prediction:
+    post:
+      tags:
+      - Demos
+      summary: Get a random video from template and do text substitution.
+      operationId: Demos_RandomPrediction
+      requestBody:
+        description: RandomPredictionRequest. Used for random predictions.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/demosRandomPredictionRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                tts:
+                  data: base64 encoded string===
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/text-to-templated-video:
+    post:
+      tags:
+      - LipSync
+      summary: Get video where someone says your text. Standart Frontend request.
+      operationId: LipSync_TextToTemplatedVideo
+      requestBody:
+        description: Get video where someone says your text. Standart Frontend request.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lipsyncTextToTemplatedVideoRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                text_to_templated_video:
+                  s3Link: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/text-to-templated-video-sota:
+    post:
+      tags:
+      - LipSync
+      summary: Get video where someone says your text. Standart Frontend request.
+      operationId: LipSync_TextToTemplatedVideoSOTA
+      requestBody:
+        description: Get video where someone says your text. Standart Frontend request.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lipsyncTextToTemplatedVideoSOTARequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                text_to_templated_video:
+                  s3Link: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/tts:
+    post:
+      tags:
+      - TTS
+      summary: Get an audio from text.
+      operationId: TTS_TTS
+      requestBody:
+        description: TTS request. Send text and speaker id (obama, eilish, etc)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ttsTTSRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                tts:
+                  data: base64 encoded string===
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/vc:
+    post:
+      tags:
+      - VC
+      summary: Get audio with another voice.
+      operationId: VC_VC
+      requestBody:
+        description: VC request. Send speaker id (obama, eilish, etc) and audio bytes.
+          Bytes should be in WAV, raw for GRPC, base64 for HTTP
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vcVCRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                vc:
+                  data: base64 encoded string===
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v2/tts:
+    post:
+      tags:
+      - TTS
+      summary: Get an audio from text.
+      operationId: TTS_TTSV2
+      requestBody:
+        description: TTS request. Send text and speaker id (obama, eilish, etc)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ttsTTSRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                newTts:
+                  url: base64 encoded string===
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v2/vc:
+    post:
+      tags:
+      - VC
+      summary: Get audio with another voice.
+      operationId: VC_VCV2
+      requestBody:
+        description: VC request. Send speaker id (obama, eilish, etc) and audio bytes.
+          Bytes should be in WAV, raw for GRPC, base64 for HTTP
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vcVCRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+              example:
+                ID: test
+                statusCode: OK
+                new_vc:
+                  data: base64 encoded string===
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INVALID_ARGUMENT
+                errorMessage: ' empty required field'
+        403:
+          description: Access Denied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: PERMISSION_DENIED
+                errorMessage: ' no permission for service'
+        500:
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ID: test
+                statusCode: INTERNAL
+                errorMessage: 'gateway is broken :( '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v3/tts:
+    post:
+      tags:
+      - TTS
+      operationId: TTS_TTSV3
+      requestBody:
+        description: TTS request. Send text and speaker id (obama, eilish, etc)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ttsTTSV3Request'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v3/vc:
+    post:
+      tags:
+      - VC
+      operationId: VC_VCV3
+      requestBody:
+        description: TTS request. Send text and speaker id (obama, eilish, etc)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vcVCV3Request'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mynaGatewayResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    asrASRRequest:
+      title: VCRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        audio:
+          $ref: '#/components/schemas/utilsAudio'
+        config:
+          $ref: '#/components/schemas/utilsSpeechConfig'
+      description: VC request. Send speaker id (obama, eilish, etc) and audio bytes.
+        Bytes should be in WAV, raw for GRPC, base64 for HTTP
+      example:
+        token: $TOKEN
+        audio: base64 encoded string===
+        speaker: obama
+    demosRandomPredictionRequest:
+      title: RandomPredictionRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        templateId:
+          type: string
+          description: The identifier of template.
+        inputText:
+          type: string
+          description: Text for substitution.
+      description: RandomPredictionRequest. Used for random predictions.
+    demosRandomPredictionResponse:
+      type: object
+      properties:
+        s3Link:
+          type: string
+        text:
+          type: string
+    lipsyncContentLipSyncResponse:
+      type: object
+      properties:
+        s3Link:
+          type: string
+        metaLink:
+          type: string
+    lipsyncContentRequest:
+      title: ContentRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        audio:
+          $ref: '#/components/schemas/utilsAudio'
+        video:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          description: Video to use, WAV format.
+          format: byte
+        config:
+          $ref: '#/components/schemas/utilsLipSyncConfig'
+      description: 'LipSync request. '
+    lipsyncCustomVideoRequest:
+      title: CustomVideoRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        audio:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          description: Target audio.
+          format: byte
+        video:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          description: Video for lipsync.
+          format: byte
+      description: Custom Video with lipsync
+      example:
+        token: $TOKEN
+        video: base64 encode mp4==
+        audio: base64 encoded wav===
+    lipsyncCustomVideoResponse:
+      type: object
+      properties:
+        s3Link:
+          type: string
+    lipsyncGreetingRequest:
+      title: GreetingRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        templateId:
+          type: string
+          description: The identifier of template.
+        voiceId:
+          type: string
+          description: The identifier of voice.
+        name:
+          type: string
+          description: Name to greet.
+      description: Greeting request. Get Id for template, for voice and send name.
+      example:
+        token: $TOKEN
+        template_id: "1254"
+        voice_id: "15"
+        name: Oleg
+    lipsyncGreetingResponse:
+      type: object
+      properties:
+        s3Link:
+          type: string
+        url:
+          type: string
+        s3Path:
+          type: string
+    lipsyncLipSyncRequest:
+      title: LipSyncRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        templateId:
+          type: string
+          description: The identifier of template.
+        audio:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          description: Audio to use in template, WAV format.
+          format: byte
+      description: LipSync request. Get Id for template, and send audio bytes. Bytes
+        should be in WAV, raw for GRPC, base64 for HTTP
+      example:
+        token: $TOKEN
+        template_id: "1940"
+        audio: base64 encoded string===
+    lipsyncLipSyncResponse:
+      type: object
+      properties:
+        s3Link:
+          type: string
+        url:
+          type: string
+        s3Path:
+          type: string
+    lipsyncTextToTemplatedVideoRequest:
+      title: TextToTemplatedVideoRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        text:
+          type: string
+          description: Text to say.
+        template:
+          type: string
+          description: Template, f.e. "santa".
+      description: Get video where someone says your text. Standart Frontend request.
+      example:
+        token: $TOKEN
+        template: santa
+        text: Try Mynalab services!
+    lipsyncTextToTemplatedVideoResponse:
+      type: object
+      properties:
+        s3Link:
+          type: string
+    lipsyncTextToTemplatedVideoSOTARequest:
+      title: TextToTemplatedVideoSOTARequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        text:
+          type: string
+          description: Text to say.
+        template:
+          type: string
+          description: Template, f.e. "santa".
+        speaker:
+          type: string
+          description: The identifier of voice.
+        textId:
+          type: integer
+          description: The identifier of text. Used in lipsync backend for some merging
+            pre-recorded videos purposes.
+          format: int32
+      description: Get video where someone says your text. Standart Frontend request.
+      example:
+        token: $TOKEN
+        template: santa
+        text: Try Mynalab services!
+        speaker: santa
+    mynaGatewayResponse:
+      type: object
+      properties:
+        ID:
+          type: string
+        statusCode:
+          $ref: '#/components/schemas/rpcCode'
+        errorMessage:
+          type: string
+        tts:
+          $ref: '#/components/schemas/ttsTTSResponse'
+        vc:
+          $ref: '#/components/schemas/vcVCResponse'
+        lipsync:
+          $ref: '#/components/schemas/lipsyncLipSyncResponse'
+        greeting:
+          $ref: '#/components/schemas/lipsyncGreetingResponse'
+        textToTemplatedVideo:
+          $ref: '#/components/schemas/lipsyncTextToTemplatedVideoResponse'
+        customVideo:
+          $ref: '#/components/schemas/lipsyncCustomVideoResponse'
+        newTts:
+          $ref: '#/components/schemas/ttsNewTTSResponse'
+        newVc:
+          $ref: '#/components/schemas/vcNewVCResponse'
+        contentLipsync:
+          $ref: '#/components/schemas/lipsyncContentLipSyncResponse'
+        randomPrediction:
+          $ref: '#/components/schemas/demosRandomPredictionResponse'
+        audio:
+          $ref: '#/components/schemas/utilsAudio'
+        text:
+          type: string
+        empty:
+          type: object
+          properties: {}
+    protobufAny:
+      type: object
+      properties:
+        '@type':
+          type: string
+      additionalProperties:
+        type: object
+    rpcCode:
+      type: string
+      description: |-
+        The canonical error codes for Google APIs.
+
+
+        Sometimes multiple error codes may apply.  Services should return
+        the most specific error code that applies.  For example, prefer
+        `OUT_OF_RANGE` over `FAILED_PRECONDITION` if both codes apply.
+        Similarly prefer `NOT_FOUND` or `ALREADY_EXISTS` over `FAILED_PRECONDITION`.
+
+         - OK: Not an error; returned on success
+
+        HTTP Mapping: 200 OK
+         - CANCELLED: The operation was cancelled, typically by the caller.
+
+        HTTP Mapping: 499 Client Closed Request
+         - UNKNOWN: Unknown error.  For example, this error may be returned when
+        a `Status` value received from another address space belongs to
+        an error space that is not known in this address space.  Also
+        errors raised by APIs that do not return enough error information
+        may be converted to this error.
+
+        HTTP Mapping: 500 Internal Server Error
+         - INVALID_ARGUMENT: The client specified an invalid argument.  Note that this differs
+        from `FAILED_PRECONDITION`.  `INVALID_ARGUMENT` indicates arguments
+        that are problematic regardless of the state of the system
+        (e.g., a malformed file name).
+
+        HTTP Mapping: 400 Bad Request
+         - DEADLINE_EXCEEDED: The deadline expired before the operation could complete. For operations
+        that change the state of the system, this error may be returned
+        even if the operation has completed successfully.  For example, a
+        successful response from a server could have been delayed long
+        enough for the deadline to expire.
+
+        HTTP Mapping: 504 Gateway Timeout
+         - NOT_FOUND: Some requested entity (e.g., file or directory) was not found.
+
+        Note to server developers: if a request is denied for an entire class
+        of users, such as gradual feature rollout or undocumented whitelist,
+        `NOT_FOUND` may be used. If a request is denied for some users within
+        a class of users, such as user-based access control, `PERMISSION_DENIED`
+        must be used.
+
+        HTTP Mapping: 404 Not Found
+         - ALREADY_EXISTS: The entity that a client attempted to create (e.g., file or directory)
+        already exists.
+
+        HTTP Mapping: 409 Conflict
+         - PERMISSION_DENIED: The caller does not have permission to execute the specified
+        operation. `PERMISSION_DENIED` must not be used for rejections
+        caused by exhausting some resource (use `RESOURCE_EXHAUSTED`
+        instead for those errors). `PERMISSION_DENIED` must not be
+        used if the caller can not be identified (use `UNAUTHENTICATED`
+        instead for those errors). This error code does not imply the
+        request is valid or the requested entity exists or satisfies
+        other pre-conditions.
+
+        HTTP Mapping: 403 Forbidden
+         - UNAUTHENTICATED: The request does not have valid authentication credentials for the
+        operation.
+
+        HTTP Mapping: 401 Unauthorized
+         - RESOURCE_EXHAUSTED: Some resource has been exhausted, perhaps a per-user quota, or
+        perhaps the entire file system is out of space.
+
+        HTTP Mapping: 429 Too Many Requests
+         - FAILED_PRECONDITION: The operation was rejected because the system is not in a state
+        required for the operation's execution.  For example, the directory
+        to be deleted is non-empty, an rmdir operation is applied to
+        a non-directory, etc.
+
+        Service implementors can use the following guidelines to decide
+        between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`:
+         (a) Use `UNAVAILABLE` if the client can retry just the failing call.
+         (b) Use `ABORTED` if the client should retry at a higher level
+             (e.g., when a client-specified test-and-set fails, indicating the
+             client should restart a read-modify-write sequence).
+         (c) Use `FAILED_PRECONDITION` if the client should not retry until
+             the system state has been explicitly fixed.  E.g., if an "rmdir"
+             fails because the directory is non-empty, `FAILED_PRECONDITION`
+             should be returned since the client should not retry unless
+             the files are deleted from the directory.
+
+        HTTP Mapping: 400 Bad Request
+         - ABORTED: The operation was aborted, typically due to a concurrency issue such as
+        a sequencer check failure or transaction abort.
+
+        See the guidelines above for deciding between `FAILED_PRECONDITION`,
+        `ABORTED`, and `UNAVAILABLE`.
+
+        HTTP Mapping: 409 Conflict
+         - OUT_OF_RANGE: The operation was attempted past the valid range.  E.g., seeking or
+        reading past end-of-file.
+
+        Unlike `INVALID_ARGUMENT`, this error indicates a problem that may
+        be fixed if the system state changes. For example, a 32-bit file
+        system will generate `INVALID_ARGUMENT` if asked to read at an
+        offset that is not in the range [0,2^32-1], but it will generate
+        `OUT_OF_RANGE` if asked to read from an offset past the current
+        file size.
+
+        There is a fair bit of overlap between `FAILED_PRECONDITION` and
+        `OUT_OF_RANGE`.  We recommend using `OUT_OF_RANGE` (the more specific
+        error) when it applies so that callers who are iterating through
+        a space can easily look for an `OUT_OF_RANGE` error to detect when
+        they are done.
+
+        HTTP Mapping: 400 Bad Request
+         - UNIMPLEMENTED: The operation is not implemented or is not supported/enabled in this
+        service.
+
+        HTTP Mapping: 501 Not Implemented
+         - INTERNAL: Internal errors.  This means that some invariants expected by the
+        underlying system have been broken.  This error code is reserved
+        for serious errors.
+
+        HTTP Mapping: 500 Internal Server Error
+         - UNAVAILABLE: The service is currently unavailable.  This is most likely a
+        transient condition, which can be corrected by retrying with
+        a backoff.
+
+        See the guidelines above for deciding between `FAILED_PRECONDITION`,
+        `ABORTED`, and `UNAVAILABLE`.
+
+        HTTP Mapping: 503 Service Unavailable
+         - DATA_LOSS: Unrecoverable data loss or corruption.
+
+        HTTP Mapping: 500 Internal Server Error
+      default: OK
+      enum:
+      - OK
+      - CANCELLED
+      - UNKNOWN
+      - INVALID_ARGUMENT
+      - DEADLINE_EXCEEDED
+      - NOT_FOUND
+      - ALREADY_EXISTS
+      - PERMISSION_DENIED
+      - UNAUTHENTICATED
+      - RESOURCE_EXHAUSTED
+      - FAILED_PRECONDITION
+      - ABORTED
+      - OUT_OF_RANGE
+      - UNIMPLEMENTED
+      - INTERNAL
+      - UNAVAILABLE
+      - DATA_LOSS
+    rpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    ttsNewTTSResponse:
+      type: object
+      properties:
+        url:
+          type: string
+    ttsTTSRequest:
+      title: TTSRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        text:
+          type: string
+          description: Your text to translate to speech.
+        speaker:
+          type: string
+          description: Identifier of speaker. Obama, musk, etc. look at https://tts.mynalabs.ai/
+            for more demo speakers
+        modelId:
+          type: string
+          description: Identifier of model to use. Only for new tts
+        speakerId:
+          type: integer
+          description: Integer id of speaker. Don't use when speaker is set.
+          format: int32
+        speed:
+          type: number
+          description: Speed coefficient.
+          format: double
+        expression:
+          type: number
+          description: Expression coefficient.
+          format: double
+        padMsLeft:
+          type: integer
+          description: Milliseconds of silence appended to the left of result audio.
+          format: int32
+        padMsRight:
+          type: integer
+          description: Milliseconds of silence appended to the right of result audio.
+          format: int32
+      description: TTS request. Send text and speaker id (obama, eilish, etc)
+      example:
+        token: $TOKEN
+        text: sample text for speaker to speak
+        speaker: obama
+    ttsTTSResponse:
+      type: object
+      properties:
+        data:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          format: byte
+    ttsTTSV3Request:
+      title: TTSRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        text:
+          type: string
+          description: Your text to translate to speech.
+        speaker:
+          $ref: '#/components/schemas/utilsSpeaker'
+        config:
+          $ref: '#/components/schemas/utilsSpeechConfig'
+        format:
+          $ref: '#/components/schemas/utilsAudioFormat'
+      description: TTS request. Send text and speaker id (obama, eilish, etc)
+      example:
+        token: $TOKEN
+        text: sample text for speaker to speak
+        speaker: obama
+    utilsAudio:
+      type: object
+      properties:
+        format:
+          $ref: '#/components/schemas/utilsAudioFormat'
+        data:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          format: byte
+        url:
+          type: string
+        text:
+          type: string
+        speaker:
+          $ref: '#/components/schemas/utilsSpeaker'
+        audio:
+          $ref: '#/components/schemas/utilsAudio'
+        generationConfig:
+          $ref: '#/components/schemas/utilsSpeechConfig'
+    utilsAudioFormat:
+      type: string
+      default: BYTES
+      enum:
+      - BYTES
+      - URL
+      - GENERATE_TTS
+      - GENERATE_VC
+    utilsLipSyncConfig:
+      type: object
+      properties:
+        imgSize:
+          type: integer
+          format: int32
+        expandProportion:
+          type: number
+          format: double
+        teethFrame:
+          type: integer
+          format: int32
+        startFrameLoop:
+          type: integer
+          format: int32
+        endFrameLoop:
+          type: integer
+          format: int32
+        textureReference:
+          type: integer
+          format: int32
+        dynamic:
+          type: boolean
+        tracking:
+          type: boolean
+        ios:
+          type: boolean
+        usePytorch3d:
+          type: boolean
+        uploadMeta:
+          type: boolean
+        template:
+          $ref: '#/components/schemas/utilsTemplate'
+    utilsSpeaker:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+          format: int32
+    utilsSpeechConfig:
+      type: object
+      properties:
+        modelId:
+          type: string
+        speed:
+          type: number
+          description: Speed coefficient.
+          format: double
+        expression:
+          type: number
+          description: Expression coefficient.
+          format: double
+        padMsLeft:
+          type: integer
+          description: Milliseconds of silence appended to the left of result audio.
+          format: int32
+        padMsRight:
+          type: integer
+          description: Milliseconds of silence appended to the right of result audio.
+          format: int32
+    utilsTemplate:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+          format: int32
+        presyncId:
+          type: integer
+          format: int32
+    vcNewVCResponse:
+      type: object
+      properties:
+        url:
+          type: string
+    vcVCRequest:
+      title: VCRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        audio:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          description: Audio to convert, WAV format.
+          format: byte
+        speaker:
+          type: string
+          description: Identifier of speaker. Obama, musk, etc. look at https://tts.mynalabs.ai/
+            for speakers
+        modelId:
+          type: string
+          description: Identifier of model to use. Only for new vc
+        speakerId:
+          type: integer
+          description: Identifier of speaker. Obama, musk, etc. look at https://tts.mynalabs.ai/
+            for speakers
+          format: int32
+        speed:
+          type: number
+          description: Speed coefficient.
+          format: double
+        expression:
+          type: number
+          description: Expression coefficient.
+          format: double
+        padMsLeft:
+          type: integer
+          description: Milliseconds of silence appended to the left of result audio.
+          format: int32
+        padMsRight:
+          type: integer
+          description: Milliseconds of silence appended to the right of result audio.
+          format: int32
+      description: VC request. Send speaker id (obama, eilish, etc) and audio bytes.
+        Bytes should be in WAV, raw for GRPC, base64 for HTTP
+      example:
+        token: $TOKEN
+        audio: base64 encoded string===
+        speaker: obama
+    vcVCResponse:
+      type: object
+      properties:
+        data:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          format: byte
+    vcVCV3Request:
+      title: TTSRequest
+      type: object
+      properties:
+        ID:
+          type: string
+          description: The identifier of the message. Used for tracking. Random UUID4
+            if not specified. Don't use if you don't need it specifically
+        token:
+          type: string
+          description: The token for query. make sure you have correct permissions
+        audio:
+          $ref: '#/components/schemas/utilsAudio'
+        speaker:
+          $ref: '#/components/schemas/utilsSpeaker'
+        config:
+          $ref: '#/components/schemas/utilsSpeechConfig'
+        format:
+          $ref: '#/components/schemas/utilsAudioFormat'
+      description: TTS request. Send text and speaker id (obama, eilish, etc)
+      example:
+        token: $TOKEN
+        text: sample text for speaker to speak
+        speaker: obama
