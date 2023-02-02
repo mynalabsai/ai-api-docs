@@ -1,0 +1,23 @@
+site_name: Myna Docs
+nav:
+  - Home: README.md
+  - Quickstart:
+    - quickstart/auth.md
+    - quickstart/curl.md
+    - quickstart/macros.md
+    - quickstart/postman.md
+    - quickstart/swagger.md
+  - API:
+    - apis/tags/ASRApi.md
+    - apis/tags/DemosApi.md
+    - apis/tags/TTSApi.md
+    - apis/tags/VCApi.md
+    - apis/tags/LipSyncApi.md
+  - OpenAPI:
+    - openapi/index.md
+theme: readthedocs
+plugins:
+   - swagger-ui-tag:
+        background: "#ffffff"
+        docExpansion: list
+        tryItOutEnabled: false

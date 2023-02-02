@@ -1,0 +1,1 @@
+<swagger-ui src="https://gateway.neiro.ai/swagger/api.swagger.json"/>
