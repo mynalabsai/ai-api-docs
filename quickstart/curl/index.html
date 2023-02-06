@@ -33,7 +33,7 @@
 </div>
 <div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
 <ul>
-<li class="toctree-l1"><a class="" href="../../README.md">Home</a>
+<li class="toctree-l1"><a class="" href="../../index.html">Home</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Quickstart</span></p>
@@ -92,7 +92,7 @@
 <div class="section" itemprop="articleBody">
 <h1 id="curl">Curl</h1>
 <p>TLDR: запрашиваем tts</p>
-<pre><code class="language-jsx">curl https://gateway.mynaservice.ai/v1/tts -X POST -H "Content-Type: application/json" -d '{"ID": "test-tts",  "token": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SjBkSE1pT25zaWJtOXNhVzFwZENJNmRISjFaWDE5LjJBREdPeS1CUTlMbWZSMWE3RXpfNEhpT2NIUkRGNWF6X3JVRi1wMmY0MzQ=","text": "i am the president of the united states","speaker": "obama","speed": 1.0,"padMsLeft": 0,"padMsRight": 0}'
+<pre><code>curl https://gateway.mynaservice.ai/v1/tts -X POST -H "Content-Type: application/json" -d '{"ID": "test-tts",  "token": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SjBkSE1pT25zaWJtOXNhVzFwZENJNmRISjFaWDE5LjJBREdPeS1CUTlMbWZSMWE3RXpfNEhpT2NIUkRGNWF6X3JVRi1wMmY0MzQ=","text": "i am the president of the united states","speaker": "obama","speed": 1.0,"padMsLeft": 0,"padMsRight": 0}'
 </code></pre>
 <pre><code class="language-jsx">{
     "ID": "test-tts",
@@ -104,7 +104,7 @@
   "padMsRight": 0,
 }
 </code></pre>
-<p><code>token</code> — тестовый токен, подробнее смотри <a href="https://www.notion.so/Auth-token-9be08543e19a4dfd84b5057e53c6f1ed">Auth / token</a> </p>
+<p><code>token</code> — тестовый токен, подробнее смотри <a href="./auth">Auth / token</a> </p>
 <p><code>ID</code> — id запроса, используется для трейсинга, логирования и прочего. Лучше не задавать, тогда это будет случайный UUID</p>
 <p><code>text</code>, <code>speaker</code>, <code>speed</code>, <code>padMsLeft</code>, <code>padMsRight</code> — параметры ттс</p>
 <p>you can find test requests here <a href="https://github.com/mynalabsai/gateway/tree/master/json">https://github.com/mynalabsai/gateway/tree/master/json</a></p>
