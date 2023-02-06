@@ -8,11 +8,11 @@ nav:
     - quickstart/postman.md
     - quickstart/swagger.md
   - API:
-    - apis/tags/ASRApi.md
-    - apis/tags/DemosApi.md
-    - apis/tags/TTSApi.md
-    - apis/tags/VCApi.md
-    - apis/tags/LipSyncApi.md
+    - apis/Apis/ASRApi.md
+    - apis/Apis/DemosApi.md
+    - apis/Apis/TTSApi.md
+    - apis/Apis/VCApi.md
+    - apis/Apis/LipSyncApi.md
   - OpenAPI:
     - openapi/index.md
 theme: readthedocs
