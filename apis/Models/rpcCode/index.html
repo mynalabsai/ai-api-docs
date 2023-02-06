@@ -5,20 +5,20 @@
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="../../img/favicon.ico" rel="shortcut icon"/>
-<title>Auth / token - Myna Docs</title>
-<link href="../../css/theme.css" rel="stylesheet"/>
-<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="../../../img/favicon.ico" rel="shortcut icon"/>
+<title>rpcCode - Myna Docs</title>
+<link href="../../../css/theme.css" rel="stylesheet"/>
+<link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Auth / token";
-        var mkdocs_page_input_path = "quickstart/auth.md";
+        var mkdocs_page_name = "rpcCode";
+        var mkdocs_page_input_path = "apis/Models/rpcCode.md";
         var mkdocs_page_url = null;
       </script>
-<script defer="" src="../../js/jquery-3.6.0.min.js"></script>
+<script defer="" src="../../../js/jquery-3.6.0.min.js"></script>
 <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
+      <script src="../../../js/html5shiv.min.js"></script>
     <![endif]-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
@@ -28,45 +28,43 @@
 <nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
 <div class="wy-side-scroll">
 <div class="wy-side-nav-search">
-<a class="icon icon-home" href="../.."> Myna Docs
+<a class="icon icon-home" href="../../.."> Myna Docs
         </a>
 </div>
 <div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
 <ul>
-<li class="toctree-l1"><a class="" href="../../README.md">Home</a>
+<li class="toctree-l1"><a class="" href="../../../README.md">Home</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Quickstart</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal current" href="./">Auth / token</a>
-<ul class="current">
-</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/auth/">Auth / token</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../curl/">Curl</a>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/curl/">Curl</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../macros/">File Macros For REST</a>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/macros/">File Macros For REST</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../postman/">Postman</a>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/postman/">Postman</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../swagger/">Swagger</a>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/swagger/">Swagger</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../apis/Apis/ASRApi/">ASRApi</a>
+<li class="toctree-l1"><a class="reference internal" href="../../Apis/ASRApi/">ASRApi</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../apis/Apis/DemosApi/">DemosApi</a>
+<li class="toctree-l1"><a class="reference internal" href="../../Apis/DemosApi/">DemosApi</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../apis/Apis/TTSApi/">TTSApi</a>
+<li class="toctree-l1"><a class="reference internal" href="../../Apis/TTSApi/">TTSApi</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../apis/Apis/VCApi/">VCApi</a>
+<li class="toctree-l1"><a class="reference internal" href="../../Apis/VCApi/">VCApi</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../apis/Apis/LipSyncApi/">LipSyncApi</a>
+<li class="toctree-l1"><a class="reference internal" href="../../Apis/LipSyncApi/">LipSyncApi</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">OpenAPI</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../openapi/">Index</a>
+<li class="toctree-l1"><a class="reference internal" href="../../../openapi/">Index</a>
 </li>
 </ul>
 </div>
@@ -75,14 +73,13 @@
 <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
 <nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
 <i class="fa fa-bars" data-toggle="wy-nav-top"></i>
-<a href="../..">Myna Docs</a>
+<a href="../../..">Myna Docs</a>
 </nav>
 <div class="wy-nav-content">
 <div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
 <ul class="wy-breadcrumbs">
-<li><a alt="Docs" class="icon icon-home" href="../.."></a> »</li>
-<li>Quickstart »</li>
-<li>Auth / token</li>
+<li><a alt="Docs" class="icon icon-home" href="../../.."></a> »</li>
+<li>rpcCode</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -90,16 +87,29 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="auth-token">Auth / token</h1>
-<p>Ask admins (@Kostya Amelichev) for token. Gateway uses JWT for generating token with special permissions: rate limit for every endpoint in particular.</p>
-<p>You need to provide expected peak RPS.</p>
-<p><strong>DO NOT USE TEST TOKENS EXCEPT WHEN YOU ARE DOING MANUAL TESTING</strong></p>
-<p>you can find test tokens here <a href="https://github.com/mynalabsai/gateway/tree/master/json">https://github.com/mynalabsai/gateway/tree/master/json</a></p>
+<h1 id="rpccode">rpcCode</h1>
+<h2 id="properties">Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a href="../README.md#documentation-for-models">[Back to Model list]</a> <a href="../README.md#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.md">[Back to README]</a></p>
 </div>
 </div><footer>
-<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-right" href="../curl/" title="Curl">Next <span class="icon icon-circle-arrow-right"></span></a>
-</div>
 <hr/>
 <div role="contentinfo">
 <!-- Copyright etc -->
@@ -113,12 +123,11 @@
 </div>
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
-<span><a href="../curl/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
-<script>var base_url = '../..';</script>
-<script defer="" src="../../js/theme_extra.js"></script>
-<script defer="" src="../../js/theme.js"></script>
+<script>var base_url = '../../..';</script>
+<script defer="" src="../../../js/theme_extra.js"></script>
+<script defer="" src="../../../js/theme.js"></script>
 <script defer="">
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);

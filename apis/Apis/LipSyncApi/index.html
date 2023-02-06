@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../../../img/favicon.ico" rel="shortcut icon"/>
+<title>LipSyncApi - Myna Docs</title>
+<link href="../../../css/theme.css" rel="stylesheet"/>
+<link href="../../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "LipSyncApi";
+        var mkdocs_page_input_path = "apis/Apis/LipSyncApi.md";
+        var mkdocs_page_url = null;
+      </script>
+<script defer="" src="../../../js/jquery-3.6.0.min.js"></script>
+<!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../../.."> Myna Docs
+        </a>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="" href="../../../README.md">Home</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Quickstart</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/auth/">Auth / token</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/curl/">Curl</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/macros/">File Macros For REST</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/postman/">Postman</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/swagger/">Swagger</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ASRApi/">ASRApi</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DemosApi/">DemosApi</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../TTSApi/">TTSApi</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../VCApi/">VCApi</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">LipSyncApi</a>
+<ul class="current">
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">OpenAPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../openapi/">Index</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../../..">Myna Docs</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a alt="Docs" class="icon icon-home" href="../../.."></a> »</li>
+<li>API »</li>
+<li>LipSyncApi</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="lipsyncapi">LipSyncApi</h1>
+<p>All URIs are relative to <em>http://gateway.neiro.ai</em></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>HTTP request</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="./#lipSyncContentLipSync"><strong>lipSyncContentLipSync</strong></a></td>
+<td><strong>POST</strong> /v1/content-lipsync</td>
+<td>Get video where someone says your text. Has a lot of configuration options.</td>
+</tr>
+<tr>
+<td><a href="./#lipSyncCustomVideo"><strong>lipSyncCustomVideo</strong></a></td>
+<td><strong>POST</strong> /v1/custom-video</td>
+<td>Clip your video with given audio and do lipsync</td>
+</tr>
+<tr>
+<td><a href="./#lipSyncGreeting"><strong>lipSyncGreeting</strong></a></td>
+<td><strong>POST</strong> /v1/greeting</td>
+<td>Get video with greeting for name.</td>
+</tr>
+<tr>
+<td><a href="./#lipSyncLipSync"><strong>lipSyncLipSync</strong></a></td>
+<td><strong>POST</strong> /v1/lipsync</td>
+<td>Get video with custom speech.</td>
+</tr>
+<tr>
+<td><a href="./#lipSyncLipSyncLooped"><strong>lipSyncLipSyncLooped</strong></a></td>
+<td><strong>POST</strong> /v1/lipsync-looped</td>
+<td>Get video with custom speech. End of video can be concatenated with initial template</td>
+</tr>
+<tr>
+<td><a href="./#lipSyncTextToTemplatedVideo"><strong>lipSyncTextToTemplatedVideo</strong></a></td>
+<td><strong>POST</strong> /v1/text-to-templated-video</td>
+<td>Get video where someone says your text. Standart Frontend request.</td>
+</tr>
+<tr>
+<td><a href="./#lipSyncTextToTemplatedVideoSOTA"><strong>lipSyncTextToTemplatedVideoSOTA</strong></a></td>
+<td><strong>POST</strong> /v1/text-to-templated-video-sota</td>
+<td>Get video where someone says your text. More accurate model with precalculations</td>
+</tr>
+</tbody>
+</table>
+<p><a name="lipSyncContentLipSync"></a></p>
+<h1 id="lipsynccontentlipsync"><strong>lipSyncContentLipSync</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse lipSyncContentLipSync(body)</p>
+</blockquote>
+<p>Get video where someone says your text. Has a lot of configuration options.</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/lipsyncContentRequest/"><strong>lipsyncContentRequest</strong></a></td>
+<td>LipSync request.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<p><a name="lipSyncCustomVideo"></a></p>
+<h1 id="lipsynccustomvideo"><strong>lipSyncCustomVideo</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse lipSyncCustomVideo(body)</p>
+</blockquote>
+<p>Clip your video with given audio and do lipsync</p>
+<h3 id="parameters_1">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/lipsyncCustomVideoRequest/"><strong>lipsyncCustomVideoRequest</strong></a></td>
+<td>Custom Video with lipsync</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type_1">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization_1">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers_1">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<p><a name="lipSyncGreeting"></a></p>
+<h1 id="lipsyncgreeting"><strong>lipSyncGreeting</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse lipSyncGreeting(body)</p>
+</blockquote>
+<p>Get video with greeting for name.</p>
+<h3 id="parameters_2">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/lipsyncGreetingRequest/"><strong>lipsyncGreetingRequest</strong></a></td>
+<td>Greeting request. Get Id for template, for voice and send name.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type_2">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization_2">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers_2">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<p><a name="lipSyncLipSync"></a></p>
+<h1 id="lipsynclipsync"><strong>lipSyncLipSync</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse lipSyncLipSync(body)</p>
+</blockquote>
+<p>Get video with custom speech.</p>
+<h3 id="parameters_3">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/lipsyncLipSyncRequest/"><strong>lipsyncLipSyncRequest</strong></a></td>
+<td>LipSync request. Get Id for template, and send audio bytes. Bytes should be in WAV, raw for GRPC, base64 for HTTP</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type_3">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization_3">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers_3">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<p><a name="lipSyncLipSyncLooped"></a></p>
+<h1 id="lipsynclipsynclooped"><strong>lipSyncLipSyncLooped</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse lipSyncLipSyncLooped(body)</p>
+</blockquote>
+<p>Get video with custom speech. End of video can be concatenated with initial template</p>
+<h3 id="parameters_4">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/lipsyncLipSyncRequest/"><strong>lipsyncLipSyncRequest</strong></a></td>
+<td>LipSync request. Get Id for template, and send audio bytes. Bytes should be in WAV, raw for GRPC, base64 for HTTP</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type_4">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization_4">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers_4">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<p><a name="lipSyncTextToTemplatedVideo"></a></p>
+<h1 id="lipsynctexttotemplatedvideo"><strong>lipSyncTextToTemplatedVideo</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse lipSyncTextToTemplatedVideo(body)</p>
+</blockquote>
+<p>Get video where someone says your text. Standart Frontend request.</p>
+<h3 id="parameters_5">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/lipsyncTextToTemplatedVideoRequest/"><strong>lipsyncTextToTemplatedVideoRequest</strong></a></td>
+<td>Get video where someone says your text. Standart Frontend request.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type_5">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization_5">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers_5">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<p><a name="lipSyncTextToTemplatedVideoSOTA"></a></p>
+<h1 id="lipsynctexttotemplatedvideosota"><strong>lipSyncTextToTemplatedVideoSOTA</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse lipSyncTextToTemplatedVideoSOTA(body)</p>
+</blockquote>
+<p>Get video where someone says your text. More accurate model with precalculations</p>
+<h3 id="parameters_6">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/lipsyncTextToTemplatedVideoSOTARequest/"><strong>lipsyncTextToTemplatedVideoSOTARequest</strong></a></td>
+<td>Get video where someone says your text. Standart Frontend request.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type_6">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization_6">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers_6">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../VCApi/" title="VCApi"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../../openapi/" title="Index">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../VCApi/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../../../openapi/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script>var base_url = '../../..';</script>
+<script defer="" src="../../../js/theme_extra.js"></script>
+<script defer="" src="../../../js/theme.js"></script>
+<script defer="">
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+<script>
+            window.update_swagger_ui_iframe_height = function (id) {
+                var iFrameID = document.getElementById(id);
+                if (iFrameID) {
+                    full_height = (iFrameID.contentWindow.document.body.scrollHeight + 80) + "px";
+                    iFrameID.height = full_height;
+                    iFrameID.style.height = full_height;
+                }
+            }
+        
+            let iframe_id_list = []
+            var iframes = document.getElementsByClassName("swagger-ui-iframe");
+            for (var i = 0; i < iframes.length; i++) { 
+                iframe_id_list.push(iframes[i].getAttribute("id"))
+            }
+        
+            let ticking = true;
+            
+            document.addEventListener('scroll', function(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(()=> {
+                        let half_vh = window.innerHeight/2;
+                        for(var i = 0; i < iframe_id_list.length; i++) {
+                            let element = document.getElementById(iframe_id_list[i])
+                            if(element==null){
+                                return
+                            }
+                            let diff = element.getBoundingClientRect().top
+                            if(element.contentWindow.update_top_val){
+                                element.contentWindow.update_top_val(half_vh - diff)
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        </script></body>
+</html>
