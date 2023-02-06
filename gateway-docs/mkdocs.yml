@@ -1,6 +1,6 @@
 site_name: Myna Docs
 nav:
-  - Home: README.md
+  - Home: index.html
   - Quickstart:
     - quickstart/auth.md
     - quickstart/curl.md
