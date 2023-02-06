@@ -24,7 +24,19 @@ jobs:
             -g markdown \
             -o /local/out/md
       
-      - name: 'Ls'
+      - name: 'Copy markdown output to site'
         run: |
-          find .
-          
+          cp out/md gateway-docs/docs/apis
+
+      - name: 'Install mkdocs'
+        run: |
+          pip install mkdocs
+      
+      - name: 'Build site'
+        run: |
+          cd gateway-docs && mkdocs build
+      
+      - name: Deploy to github pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: site          
