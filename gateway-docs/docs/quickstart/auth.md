@@ -1,6 +1,6 @@
 # Auth / token
 
-Ask admins (@Kostya Amelichev) for token. Gateway uses JWT for generating token with special permissions: rate limit for every endpoint in particular.
+Ask admins for token. Gateway uses JWT for generating token with special permissions: rate limit for every endpoint in particular.
 
 You need to provide expected peak RPS.
 

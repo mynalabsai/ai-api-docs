@@ -2,11 +2,17 @@ site_name: Myna Docs
 nav:
   - Home: index.html
   - Quickstart:
+    - quickstart/tts.md
+    - quickstart/vc.md
+    - quickstart/lipsync.md
     - quickstart/auth.md
-    - quickstart/curl.md
-    - quickstart/macros.md
-    - quickstart/postman.md
-    - quickstart/swagger.md
+  - Guides:
+    - guides/swagger.md
+    - guides/postman.md
+    - guides/error_handling.md
+    - guides/audio.md
+    - guides/video.md
+    - guides/macros.md
   - API:
     - apis/Apis/ASRApi.md
     - apis/Apis/DemosApi.md
