@@ -1,0 +1,30 @@
+name: Build
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  openapi-compilation:
+    name: 'Build from swagger'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v2
+
+      - name: 'Pull swagger'
+        run: |
+          wget https://gateway.neiro.ai/swagger/api.swagger.json
+
+      - name: 'Build markdown api'
+        run: |
+          docker run --rm \
+            -v $PWD:/local openapitools/openapi-generator-cli generate \
+            -i /local/api.swagger.json \
+            -g markdown \
+            -o /local/out/md
+      
+      - name: 'Ls'
+        run: |
+          find .
+          
