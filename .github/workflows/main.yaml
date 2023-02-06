@@ -31,6 +31,10 @@ jobs:
       - name: 'Install mkdocs'
         run: |
           pip install mkdocs
+
+      - name: 'Install mkdocs swagger tag'
+        run: |
+          pip install mkdocs-swagger-ui-tag
       
       - name: 'Build site'
         run: |
