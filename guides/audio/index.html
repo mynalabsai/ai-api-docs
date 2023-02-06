@@ -6,14 +6,14 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../img/favicon.ico" rel="shortcut icon"/>
-<title>Auth / token - Myna Docs</title>
+<title>Audio - Myna Docs</title>
 <link href="../../css/theme.css" rel="stylesheet"/>
 <link href="../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Auth / token";
-        var mkdocs_page_input_path = "quickstart/auth.md";
+        var mkdocs_page_name = "Audio";
+        var mkdocs_page_input_path = "guides/audio.md";
         var mkdocs_page_url = null;
       </script>
 <script defer="" src="../../js/jquery-3.6.0.min.js"></script>
@@ -37,31 +37,37 @@
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Quickstart</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../tts/">TTS</a>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/tts/">TTS</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../vc/">VC</a>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/vc/">VC</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../lipsync/">LipSync</a>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/lipsync/">LipSync</a>
 </li>
-<li class="toctree-l1 current"><a class="reference internal current" href="./">Auth / token</a>
-<ul class="current">
-</ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/auth/">Auth / token</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Guides</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../guides/swagger/">Swagger</a>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../swagger/">Swagger</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../guides/postman/">Postman</a>
+<li class="toctree-l1"><a class="reference internal" href="../postman/">Postman</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../guides/error_handling/">Error handling</a>
+<li class="toctree-l1"><a class="reference internal" href="../error_handling/">Error handling</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../guides/audio/">Audio</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Audio</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#bytes">Bytes</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../guides/video/">Video</a>
+<li class="toctree-l2"><a class="reference internal" href="#url">Url</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../guides/macros/">File Macros For REST</a>
+<li class="toctree-l2"><a class="reference internal" href="#generated">Generated</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../video/">Video</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../macros/">File Macros For REST</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
@@ -94,8 +100,8 @@
 <div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
 <ul class="wy-breadcrumbs">
 <li><a alt="Docs" class="icon icon-home" href="../.."></a> »</li>
-<li>Quickstart »</li>
-<li>Auth / token</li>
+<li>Guides »</li>
+<li>Audio</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -103,16 +109,55 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="auth-token">Auth / token</h1>
-<p>Ask admins for token. Gateway uses JWT for generating token with special permissions: rate limit for every endpoint in particular.</p>
-<p>You need to provide expected peak RPS.</p>
-<p><strong>DO NOT USE TEST TOKENS EXCEPT WHEN YOU ARE DOING MANUAL TESTING</strong></p>
-<p>you can find test tokens here <a href="https://github.com/mynalabsai/gateway/tree/master/json">https://github.com/mynalabsai/gateway/tree/master/json</a></p>
+<h1 id="audio">Audio</h1>
+<p>There are several ways audio can be represented.</p>
+<h2 id="bytes">Bytes</h2>
+<p>You can send video in bytes, wav. Either base64 (REST) or raw bytes (GRPC) or file macros (REST, <a href="../macros/">read here</a>)</p>
+<pre><code class="language-jsx">"audio": {
+    "format": "BYTES",
+    "data": "$nevergonnagiveyouup" // file macros
+}
+</code></pre>
+<h2 id="url">Url</h2>
+<p>You can pass an audio with url, f.e. to object storage.</p>
+<pre><code class="language-jsx">"audio": {
+    "format": "URL",
+    "url": "https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT?autoplay=true"
+}
+</code></pre>
+<h2 id="generated">Generated</h2>
+<p>You can create hidden requests with generate-audio requests, such as <code>GENERATE_TTS</code> and <code>GENERATE_VC</code></p>
+<pre><code class="language-jsx">"audio": {
+    "format": "GENERATE_TTS",
+    "text": "i am the president of the united states",
+    "speaker": {
+        "name": "obama"
+    }.
+    "configuration": {
+        "speed": 0.8
+    }
+}
+</code></pre>
+<pre><code class="language-jsx">"audio": {
+    "format": "GENERATE_VC",
+    "speaker": {
+        "name": "obama"
+    },
+    "audio": {
+        "format": "BYTES",
+        "data": "$nevergonnagiveyouup"
+    }
+    "configuration": {
+        "speed": 0.8
+    }
+}
+</code></pre>
+<p>Looking at <code>GENERATE_VC</code>, we expect a really good question to be asked - wait, is this a recursive type? Well, yes, but we restrict it to level-two depth, so <code>"audio": {"audio": {"audio": {}}}</code> will throw <code>INVALID_ARGUMENT</code> in response</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../lipsync/" title="LipSync"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../../guides/swagger/" title="Swagger">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../error_handling/" title="Error handling"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../video/" title="Video">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
@@ -127,8 +172,8 @@
 </div>
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
-<span><a href="../lipsync/" style="color: #fcfcfc">« Previous</a></span>
-<span><a href="../../guides/swagger/" style="color: #fcfcfc">Next »</a></span>
+<span><a href="../error_handling/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../video/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script>var base_url = '../..';</script>

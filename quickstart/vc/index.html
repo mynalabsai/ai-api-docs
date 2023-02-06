@@ -6,14 +6,14 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../img/favicon.ico" rel="shortcut icon"/>
-<title>Swagger - Myna Docs</title>
+<title>VC - Myna Docs</title>
 <link href="../../css/theme.css" rel="stylesheet"/>
 <link href="../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Swagger";
-        var mkdocs_page_input_path = "quickstart/swagger.md";
+        var mkdocs_page_name = "VC";
+        var mkdocs_page_input_path = "quickstart/vc.md";
         var mkdocs_page_url = null;
       </script>
 <script defer="" src="../../js/jquery-3.6.0.min.js"></script>
@@ -38,17 +38,30 @@
 </ul>
 <p class="caption"><span class="caption-text">Quickstart</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../auth/">Auth / token</a>
+<li class="toctree-l1"><a class="reference internal" href="../tts/">TTS</a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../curl/">Curl</a>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../macros/">File Macros For REST</a>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../postman/">Postman</a>
-</li>
-<li class="toctree-l1 current"><a class="reference internal current" href="./">Swagger</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">VC</a>
 <ul class="current">
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lipsync/">LipSync</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../auth/">Auth / token</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/swagger/">Swagger</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/postman/">Postman</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/error_handling/">Error handling</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/audio/">Audio</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/video/">Video</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/macros/">File Macros For REST</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
@@ -82,7 +95,7 @@
 <ul class="wy-breadcrumbs">
 <li><a alt="Docs" class="icon icon-home" href="../.."></a> »</li>
 <li>Quickstart »</li>
-<li>Swagger</li>
+<li>VC</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -90,21 +103,29 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="swagger">Swagger</h1>
-<p>Swagger - описание API. Со стороны Gateway вся документация ведется в первую очередь там, потому что ее проще всего интегрировать в проекты, тестировать интерактивно.</p>
-<p>В архитектуре гейтвея почти невозможно добавить эндпоинт сервис так, чтобы он не попал в сваггер, поэтому искать информацию об эндпоинтах надо именно там</p>
-<p><a href="https://gateway.neiro.ai/swaggerui">https://gateway.neiro.ai/swaggerui</a></p>
-<p>Зачем нужно?</p>
-<ul>
-<li>Можно интегрировать в <a href="../postman/">Postman</a></li>
-<li>Можно прямо из браузера протестить</li>
-<li>Легко делиться с внешними пользователями</li>
-</ul>
+<h1 id="vc">VC</h1>
+<pre><code>curl https://gateway.mynaservice.ai/v3/vc -X POST -H "Content-Type: multipart/form-data" -F 'data={"ID": "test-vc",  "token": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SjBkSE1pT25zaWJtOXNhVzFwZENJNmRISjFaWDE5LjJBREdPeS1CUTlMbWZSMWE3RXpfNEhpT2NIUkRGNWF6X3JVRi1wMmY0MzQ=","audio": {"format": "BYTES", "data": "$rickroll"}, "speaker": {"name": "obama"}}' -F 'rickroll=nevergonnagiveyouup.wav'
+</code></pre>
+<pre><code class="language-jsx">{
+    "ID": "test-vc",
+    "token": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SjBkSE1pT25zaWJtOXNhVzFwZENJNmRISjFaWDE5LjJBREdPeS1CUTlMbWZSMWE3RXpfNEhpT2NIUkRGNWF6X3JVRi1wMmY0MzQ=", 
+    "audio": {
+        "format": "BYTES",
+        "data": "$rickroll"
+    },
+    "speaker": {
+        "name": "obama"
+    }
+}
+</code></pre>
+<p><code>token</code> — Test token, read <a href="./auth">Auth / token</a> for further information.</p>
+<p><code>ID</code> — Request ID, which is used for tracing and logging. By default it is a random UUID4 and we believe you should go with default way until you specifically want otherwise</p>
+<p>There are more ways to upload audio (files, url, raw bytes), have a look <a href="../../guides/audio/">here</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../postman/" title="Postman"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../../apis/Apis/ASRApi/" title="ASRApi">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../tts/" title="TTS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../lipsync/" title="LipSync">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
@@ -119,8 +140,8 @@
 </div>
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
-<span><a href="../postman/" style="color: #fcfcfc">« Previous</a></span>
-<span><a href="../../apis/Apis/ASRApi/" style="color: #fcfcfc">Next »</a></span>
+<span><a href="../tts/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../lipsync/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script>var base_url = '../..';</script>
