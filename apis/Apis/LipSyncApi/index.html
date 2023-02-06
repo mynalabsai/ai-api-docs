@@ -127,6 +127,11 @@
 <td>Get video with custom speech. End of video can be concatenated with initial template</td>
 </tr>
 <tr>
+<td><a href="./#lipSyncLipSyncV2"><strong>lipSyncLipSyncV2</strong></a></td>
+<td><strong>POST</strong> /v2/lipsync</td>
+<td>Get video with custom speech.</td>
+</tr>
+<tr>
 <td><a href="./#lipSyncTextToTemplatedVideo"><strong>lipSyncTextToTemplatedVideo</strong></a></td>
 <td><strong>POST</strong> /v1/text-to-templated-video</td>
 <td>Get video where someone says your text. Standart Frontend request.</td>
@@ -308,13 +313,47 @@
 <li><strong>Content-Type</strong>: application/json</li>
 <li><strong>Accept</strong>: application/json</li>
 </ul>
+<p><a name="lipSyncLipSyncV2"></a></p>
+<h1 id="lipsynclipsyncv2"><strong>lipSyncLipSyncV2</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse lipSyncLipSyncV2(body)</p>
+</blockquote>
+<p>Get video with custom speech.</p>
+<h3 id="parameters_5">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/lipsyncLipSyncV2Request/"><strong>lipsyncLipSyncV2Request</strong></a></td>
+<td>LipSync request. Get Id for template, and send audio bytes. Bytes should be in WAV, raw for GRPC, base64 for HTTP</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type_5">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization_5">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers_5">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
 <p><a name="lipSyncTextToTemplatedVideo"></a></p>
 <h1 id="lipsynctexttotemplatedvideo"><strong>lipSyncTextToTemplatedVideo</strong></h1>
 <blockquote>
 <p>mynaGatewayResponse lipSyncTextToTemplatedVideo(body)</p>
 </blockquote>
 <p>Get video where someone says your text. Standart Frontend request.</p>
-<h3 id="parameters_5">Parameters</h3>
+<h3 id="parameters_6">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -333,11 +372,11 @@
 </tr>
 </tbody>
 </table>
-<h3 id="return-type_5">Return type</h3>
+<h3 id="return-type_6">Return type</h3>
 <p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
-<h3 id="authorization_5">Authorization</h3>
+<h3 id="authorization_6">Authorization</h3>
 <p>No authorization required</p>
-<h3 id="http-request-headers_5">HTTP request headers</h3>
+<h3 id="http-request-headers_6">HTTP request headers</h3>
 <ul>
 <li><strong>Content-Type</strong>: application/json</li>
 <li><strong>Accept</strong>: application/json</li>
@@ -348,7 +387,7 @@
 <p>mynaGatewayResponse lipSyncTextToTemplatedVideoSOTA(body)</p>
 </blockquote>
 <p>Get video where someone says your text. More accurate model with precalculations</p>
-<h3 id="parameters_6">Parameters</h3>
+<h3 id="parameters_7">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -367,11 +406,11 @@
 </tr>
 </tbody>
 </table>
-<h3 id="return-type_6">Return type</h3>
+<h3 id="return-type_7">Return type</h3>
 <p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
-<h3 id="authorization_6">Authorization</h3>
+<h3 id="authorization_7">Authorization</h3>
 <p>No authorization required</p>
-<h3 id="http-request-headers_6">HTTP request headers</h3>
+<h3 id="http-request-headers_7">HTTP request headers</h3>
 <ul>
 <li><strong>Content-Type</strong>: application/json</li>
 <li><strong>Accept</strong>: application/json</li>
