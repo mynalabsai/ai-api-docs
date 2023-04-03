@@ -115,19 +115,58 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="./#demosEmailMedia"><strong>demosEmailMedia</strong></a></td>
+<td><strong>POST</strong> /v1/email-media</td>
+<td>Send produced mediafile to email.</td>
+</tr>
+<tr>
 <td><a href="./#demosRandomPrediction"><strong>demosRandomPrediction</strong></a></td>
 <td><strong>POST</strong> /v1/random-prediction</td>
 <td>Get a random video from template and do text substitution.</td>
 </tr>
 </tbody>
 </table>
+<p><a name="demosEmailMedia"></a></p>
+<h1 id="demosemailmedia"><strong>demosEmailMedia</strong></h1>
+<blockquote>
+<p>mynaGatewayResponse demosEmailMedia(body)</p>
+</blockquote>
+<p>Send produced mediafile to email.</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>body</strong></td>
+<td><a href="../../Models/demosEmailMediaRequest/"><strong>demosEmailMediaRequest</strong></a></td>
+<td>EmailMediaRequest. Used for sending processed media to b2b clients email.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-type">Return type</h3>
+<p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
+<h3 id="authorization">Authorization</h3>
+<p>No authorization required</p>
+<h3 id="http-request-headers">HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
 <p><a name="demosRandomPrediction"></a></p>
 <h1 id="demosrandomprediction"><strong>demosRandomPrediction</strong></h1>
 <blockquote>
 <p>mynaGatewayResponse demosRandomPrediction(body)</p>
 </blockquote>
 <p>Get a random video from template and do text substitution.</p>
-<h3 id="parameters">Parameters</h3>
+<h3 id="parameters_1">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -146,11 +185,11 @@
 </tr>
 </tbody>
 </table>
-<h3 id="return-type">Return type</h3>
+<h3 id="return-type_1">Return type</h3>
 <p><a href="../../Models/mynaGatewayResponse/"><strong>mynaGatewayResponse</strong></a></p>
-<h3 id="authorization">Authorization</h3>
+<h3 id="authorization_1">Authorization</h3>
 <p>No authorization required</p>
-<h3 id="http-request-headers">HTTP request headers</h3>
+<h3 id="http-request-headers_1">HTTP request headers</h3>
 <ul>
 <li><strong>Content-Type</strong>: application/json</li>
 <li><strong>Accept</strong>: application/json</li>

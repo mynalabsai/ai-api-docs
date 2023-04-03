@@ -6,14 +6,14 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>utilsSpeechConfig - Myna Docs</title>
+<title>demosEmailMediaRequest - Myna Docs</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "utilsSpeechConfig";
-        var mkdocs_page_input_path = "apis/Models/utilsSpeechConfig.md";
+        var mkdocs_page_name = "demosEmailMediaRequest";
+        var mkdocs_page_input_path = "apis/Models/demosEmailMediaRequest.md";
         var mkdocs_page_url = null;
       </script>
 <script defer="" src="../../../js/jquery-3.6.0.min.js"></script>
@@ -92,7 +92,7 @@
 <div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
 <ul class="wy-breadcrumbs">
 <li><a alt="Docs" class="icon icon-home" href="../../.."></a> »</li>
-<li>utilsSpeechConfig</li>
+<li>demosEmailMediaRequest</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -100,7 +100,7 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="utilsspeechconfig">utilsSpeechConfig</h1>
+<h1 id="demosemailmediarequest">demosEmailMediaRequest</h1>
 <h2 id="properties">Properties</h2>
 <table>
 <thead>
@@ -113,52 +113,28 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>modelId</strong></td>
+<td><strong>ID</strong></td>
 <td><strong>String</strong></td>
-<td>Model id for processing. if not specified it uses default.</td>
-<td>[optional] [default to null]</td>
+<td>The identifier of the message. Used for tracking. Random UUID4 if not specified. Don't use if you don't need it specifically</td>
+<td>[optional] [default to random uuid4]</td>
 </tr>
 <tr>
-<td><strong>speed</strong></td>
-<td><strong>Double</strong></td>
-<td>Speed coefficient.</td>
-<td>[optional] [default to 1.0]</td>
+<td><strong>token</strong></td>
+<td><strong>String</strong></td>
+<td>The token for query. make sure you have correct permissions</td>
+<td>[default to null]</td>
 </tr>
 <tr>
-<td><strong>expression</strong></td>
-<td><strong>Double</strong></td>
-<td>Expression coefficient.</td>
-<td>[optional] [default to 1.0]</td>
+<td><strong>receiverAddress</strong></td>
+<td><strong>String</strong></td>
+<td>The email to whom you need to send an email.</td>
+<td>[default to null]</td>
 </tr>
 <tr>
-<td><strong>padMsLeft</strong></td>
-<td><strong>Integer</strong></td>
-<td>Milliseconds of silence appended to the left of result audio.</td>
-<td>[optional] [default to 0]</td>
-</tr>
-<tr>
-<td><strong>padMsRight</strong></td>
-<td><strong>Integer</strong></td>
-<td>Milliseconds of silence appended to the right of result audio.</td>
-<td>[optional] [default to 0]</td>
-</tr>
-<tr>
-<td><strong>outputRate</strong></td>
-<td><a href="../utilsSpeechAudioRate/"><strong>utilsSpeechAudioRate</strong></a></td>
+<td><strong>mediaFile</strong></td>
+<td><a href="../utilsProducedMediaFile/"><strong>utilsProducedMediaFile</strong></a></td>
 <td></td>
-<td>[optional] [default to null]</td>
-</tr>
-<tr>
-<td><strong>language</strong></td>
-<td><a href="../utilsLanguage/"><strong>utilsLanguage</strong></a></td>
-<td></td>
-<td>[optional] [default to null]</td>
-</tr>
-<tr>
-<td><strong>acoustics</strong></td>
-<td><a href="../utilsAcoustics/"><strong>utilsAcoustics</strong></a></td>
-<td></td>
-<td>[optional] [default to null]</td>
+<td>[default to null]</td>
 </tr>
 </tbody>
 </table>
